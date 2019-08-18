@@ -1,0 +1,1167 @@
+%%
+%% This is file `sample-acmtog.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `acmtog')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-acmtog.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% The first command in your LaTeX source must be the \documentclass command.
+\documentclass[sigconf,review]{acmart}
+\usepackage{balance}
+\usepackage{dblfloatfix}
+\usepackage[utf8]{inputenc}
+\pagenumbering{alph}
+
+% For Computer Society journals, IEEEtran defaults to the use of 
+% Palatino/Palladio as is done in IEEE Computer Society journals.
+% To go back to Times Roman, you can use this code:
+%\renewcommand{\rmdefault}{ptm}\selectfont
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+\usepackage{color, colortbl}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+
+\newcommand{\fig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\tbl}[1]{Figure~\ref{tbl:#1}}
+\newcommand{\tion}[1]{\S\ref{tion:#1}}
+
+
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows}
+\usetikzlibrary {positioning}
+\tikzset{main node/.style={circle,fill=white!20,draw,minimum size=0.5cm,inner sep=0pt}}
+\usepackage[tikz]{bclogo}
+\newenvironment{RQ}[1]%
+{\noindent\begin{minipage}[c]{\linewidth}%
+\begin{bclogo}[couleur=gray!20,%
+                arrondi=0.1,logo=\bctrombone,% 
+                ombre=true]{{\small ~#1}}}%
+{\end{bclogo}\vspace{2mm}\end{minipage}}
+
+%\usepackage{cite}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{dblfloatfix} 
+\usepackage{tikz}
+\usepackage{bchart}
+\setlist[description]{leftmargin=1cm}
+\usepackage{wrapfig}
+\usepackage{multirow}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmcopyright}
+\copyrightyear{2018}
+\acmYear{2018}
+\acmDOI{10.1145/1122445.1122456}
+
+
+%%
+%% These commands are for a JOURNAL article.
+\acmJournal{TOG}
+\acmVolume{37}
+\acmNumber{4}
+\acmArticle{111}
+\acmMonth{8}
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+\citestyle{acmauthoryear}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Why Software Projects need Heroes\\(Lessons Learned from 1100+ Projects)}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\author{Suvodeep Majumder}
+\email{smajumd3@ncsu.edu}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}
+  \postcode{27695}
+}
+
+\author{Joymallya Chakraborty}
+\email{jchakra@ncsu.edu}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}
+  \postcode{27695}
+}
+
+\author{Amritanshu Agrawal}
+\email{aagrawa8@ncsu.edu}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}
+  \postcode{27695}
+}
+
+\author{Tim Menzies}
+\email{timm@ieee.org}
+\affiliation{%
+ \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}
+  \postcode{27695}
+}
+
+
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Majumder et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+  A ``hero'' project is one where  80\% or more of the contributions are made by the 20\% of the developers. Those developers are called ``hero'' developers. In the literature, ``hero''  projects are  deprecated since they might   cause bottlenecks 
+in development and communication. However, there is little empirical evidence on this matter.
+Further, recent studies show that such hero projects are very prevalent.
+Accordingly, 
+this paper explores the effect of having heroes in project, from a code quality perspective. 
+We analyzed  1100+ open source GitHub projects. Based on the analysis,
+we find that   (a)~majority of the projects are hero projects;  and (b)~the
+commits from ``hero developers'' (who
+contribute most to the code) result in far fewer bugs than other developers.  That is,
+contrary
+to the literature, 
+heroes are standard and very useful  part of modern open source projects.
+\end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010520.10010553.10010562</concept_id>
+  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010575.10010755</concept_id>
+  <concept_desc>Computer systems organization~Redundancy</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010553.10010554</concept_id>
+  <concept_desc>Computer systems organization~Robotics</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10003033.10003083.10003095</concept_id>
+  <concept_desc>Networks~Network reliability</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Computer systems organization~Embedded systems}
+\ccsdesc[300]{Computer systems organization~Redundancy}
+\ccsdesc{Computer systems organization~Robotics}
+\ccsdesc[100]{Networks~Network reliability}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{Software Analytic, GitHub, Software Defects, Heroes,  Social interaction, Code Interaction}
+
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+\section{Introduction}
+A ``hero'' project is one where  80\% or more of the contributions come from 20\% of  the developers. Those developers are called ``hero'' developers. 
+In the literature, hero projects are deprecated  since, it is said,
+they are like bottlenecks that slow down the  project development process and causes information loss~\cite{bier2011online,boehm2006view,hislop2002integrating,morcovcomplex,wood2005multiview,fitzgerald2003making}. 
+
+Recent studies have motivated a re-examination of the implications of heroes.
+%Mockus et al.~\cite{mockus2002two} analyzed Apache and Mozilla projects to show the presence of heroes in the project and, surprisingly,  their positive influence of projects. 
+In 2018,  Agrawal et al.~\cite{Agrawal_2018} studied
+ 661 open source projects and  171 in-house
+ proprietary projects.
+ In that sample, over 89\% of projects were hero-based\footnote{This text    use ``hero'' for   women and men since recent publications
+ use it to denote admired people of all genders-- see bit.ly/2UhJCek.}. 
+Only in small open source projects (with under 15 core developers) 
+where non-hero projects were more prevalent. 
+  
+ 
+
+To say the least, this widespread prevalence of heroes is  at odds with established
+wisdom in the SE literature\cite{bier2011online,boehm2006view,hislop2002integrating,morcovcomplex,wood2005multiview,ricca2010heroes,robles2006contributor,capiluppi2007adapting}.
+Hence, it is now   an open and pressing issue to understand why so many projects are hero-based.
+This paper verifies the result which Agrawal et al.~\cite{Agrawal_2018} found out.
+All of project data was recollected from scratch from  double the number of open source projects (over 1100   projects) than  used by Agrawal et al.
+Also,
+we use a different method for recognizing a hero project.   Agrawal et al. just counted the number
+of commits made by each developer. In this study, we say heroes are those who participate in 80\% (or more) of the total no. of commits. At the ICSE'14 keynote,
+James Herbsleb mentioned that communication between developers is an important factor to find bugs when code interaction happens ~\cite{Herbsleb:2014}. So, we decided to find out not only major code contributors, but also developers who take part in majority of the communication ( Here GitHub comments ). Hence, we actually use a new definition of ``hero''. The developers who are responsible for 80\% or more contribution and communication both are considered as ``hero'' developers in this study. 
+
+Despite our different ways to recognize ``heroes'' and despite our much larger sample, we come to
+similar conclusions as   Agrawal et al. We find that 85\% of our projects contain heroes, which is very similar
+to the Agrawal et al. result. More importantly, we can explain {\em why} heroes are more important. As shown below,
+our ``hero'' commit patterns (where ``heroes'' are those who interact most with other developers) are
+associated with dramatically fewer defects than the commits from non-heroes (who interact with  fewer people).
+
+This is not the first paper to comment on the use of hero developers. 
+For example,
+in 1975  Brooks~\cite{Brooks:1975} proposed
+basing programming teams around a small number of ``chief programmers'' (which we would call ``heroes'')  who are supported by a large number of support staff
+(Brooks's analogy was the operating theater where one surgeon is supported by one or two anesthetists, several nurses,
+clerical staff, etc). 
+The Agile Alliance~\cite{cockburn2006agile} and Bach et al.~\cite{bach1995enough} believed that heroes are the core ingredients in successful software projects saying ``... the central issue is the human processor - the hero  who steps up and solves the problems that lie between a need express and a need fulfilled.'' 
+In 2002, Mockus et al.~\cite{mockus2002two} analyzed Apache and Mozilla projects to show the presence of heroes in the project and
+reported, surprisingly,  their positive influence of projects. 
+  
+
+That said, this article is different to the above since:
+
+\be
+\item
+We clearly demonstrate the benefits of hero-based development, which is contrary to much prior pessimism~\cite{bier2011online,boehm2006view,hislop2002integrating,morcovcomplex,wood2005multiview,fitzgerald2003making}.
+\item
+Our conclusions come from   over 1100+ projects, whereas 
+prior work   commented
+on heroes using data 
+from just a handful of projects~\cite{544352,LI1993111,Zimmermann:2009:CDP:1595696.1595713,935855,841025,Bird:2011:DTM:2025113.2025119,Pamela,bell2,Kumar2017,jiarpakdee2018impact,8595100}.
+\item
+Our conclusions come from very recent projects instead of decades-old data~\cite{Jayanthi2018,Gupta2017,jiarpakdee2018impact,kemerer2009impact,Pamela,fengzhang}.
+\item
+We   show curves that precisely illustrate the effects on code quality
+for different levels of communication. This is different to prior
+work that only offered general qualitative principles~\cite{wolf2009predicting,de2004sometimes,grinter1999geography,herbsleb1999splitting,cataldo2013coordination,cataldo2007coordination}.
+\item
+As discussed in Section~\ref{tion:metrics}, this
+paper makes its conclusions using more metrics
+than  prior work.   Not only do we observe an effect (using
+{\em process} and {\em resource} metrics) to report the  frequency of
+developer contribution, but we also report the consequence of that effect
+(by joining to {\em produce metrics} to reveal software quality).
+\item
+Instead of just  reporting an effect (that heroes are common, as done by
+ Agrawal et al.~\cite{Agrawal_2018}) we can explain that effect
+ (heroes are those that communicate more and that communication
+ leads to fewer bugs).
+\item
+As a service to other researchers, all  the  scripts and data of this study
+can be downloaded from \href{http://tiny.cc/git_mine}{tiny.cc/git\_mine}.
+\ee
+
+Before beginning, we make some definitional points.
+Firstly, when we say 1100+ projects, that is shorthand for the following.
+Our results used the intersection of two graphs of  {\em code interaction graph} (of who writes what code) from 1327 projects with
+a {\em social interaction} graph (who discusses what commits)
+from 1173 projects.    .
+
+Secondly, by code interaction graphs
+and  social interaction graphs, we mean the following. Each graph
+has   own nodes and edges $\{N,E\}$. For
+code interaction graphs:
+\bi
+\item Individual developers have their own  node $N_a$;
+\item
+The edge $E_b$ connects two nodes and indicates
+if ever one  developer has changed another developer's code. 
+\ei
+For social interaction graphs like \fig{Socialgraph}:
+\bi
+\item A node $N_c$ is created for each  individual who has
+created or commented on an issue.
+\item An edge $E_d$ indicates a communication between two individuals
+(as recorded in the issue tracking system.
+If this happens $N$ times then the weight $W_d=N$.
+\ei
+
+
+ \begin{figure}[!t]
+\begin{center}
+\includegraphics[width=\linewidth]{social_model.png}
+\end{center}
+\caption{An example of social interaction graph generated from our data. 
+The number  of nodes equals the number of unique people participating in issue conversation about a commit.
+The existence and width  of each edge represents the frequency of conversation between pairs of developers. Hero programmers are those nodes which have very high node degree (i.e. who have participated in lot of unique conversations). Note that, in this example data, these hero
+programmers are few in number.}
+\label{fig:Socialgraph}
+\end{figure}
+
+Thirdly, our definition of ``hero'' is not just who ``writes 80\% of the software''. We also combined communication with contribution. 
+We say heroes are those that ``writes 80\% of the commits`` and also ``participate in 80\% of the discussions prior to the commits''. So, basically we are taking the intersection of ``Code interaction graph'' and ``social interaction graph'' to find out the most active members. In both the graphs, vertices with most number of edges indicate those developers. 
+ 
+
+
+The rest of the paper is organized into the following sections. Section~\ref{sec:Background And Prior Work} provides background information that directly relates to our research questions, in addition to laying out the motivation behind our work. Section~\ref{sec:Data Collections} explains the data collection process and  Section~\ref{sec:Experimental Setup}, a detailed description of our experimental setup and data is given, along with our performance criteria for evaluation is presented. It is followed by Section~\ref{sec:Results} the results of the experiments and answers to our research questions are detailed. Section~\ref{sec:Threats to Validity} discusses threats to validity. Finally Section~\ref{sec:Conclusion} concludes the paper.
+
+
+
+\section{Background And Prior Work }
+\label{sec:Background And Prior Work}
+
+\subsection{Heroism in Software Development}
+
+Heroism in software development is a widely studied topic. Various researchers have found the presence of heroes in software projects. For example:
+\bi
+\item
+Peterson analyzed the software development process on GitHub and found out a pattern that most development is done by a small group of developers \cite{Peterson}. He stated that for most of the GitHub projects, 95-100\% commits come from very few developers. 
+\item
+In 2002, Koch et al.~\cite{koch2002effort} studied the  GNOME project and showed the presence of heroes through out the project history. They conjectured (without proof) that  the small number of hero developers may allow easy communication and collaboration. Interestingly, they also showed there is no relation between developer's time in the project and being a hero developer. 
+\item
+In 2005, Krishnamurthy~\cite{KrishnamurthyS} studied 100 open source projects to find
+that a few individuals are responsible for the main contribution of the project in most of the cases. 
+\item
+In 2006 and 2009, Robles et al.~\cite{robles2009evolution,robles2006contributor} explored in their research the presence and evolution of heroes in open source software community.
+\item
+In 2018, Agarwal et al. \cite{Agrawal_2018} stated that hero projects are very common. In fact, as software projects grow in size, nearly all projects become hero projects.
+\ei
+Most prior researchers deprecate heroism in software projects. They argue  that
+\bi
+\item
+ Having most of the work being dependent on a small number of heroes can become a bottleneck that slows down project development ~\cite{bier2011online,morcovcomplex,hislop2002integrating,boehm2006view,wood2005multiview}.
+ \item
+ In  the case of hero projects, there is less collaboration between team members since there are few active team members. So, heroes are affecting the collaboration which is essential \cite{1008000,4221622}. 
+ \ei
+ This second point is   problematic since, in the literature,
+studies that analyze  distributed software development on social coding platforms like GitHub and Bitbucket~\cite{dias2016does,cosentino2017systematic} remark
+on how social collaborations can reduce the cost and efforts of software development without degrading the quality of software.
+Distributed coding effort is beneficial for agile community-based programming practices which can in turn have higher customer satisfaction, lower defect rates, and faster development times ~\cite{moniruzzaman2013comparative, rastogi2017empirical}. Customer satisfaction, it is argued,  is increased when faster development leads to:
+
+\bi
+\item Increasing the number of issues/bugs/enhancements being re-solved~\cite{mockus2002two,jarczyk2014github,bissyande2013got,athanasiou2014test,gupta2014process,reyes2017analyzing}.
+\item Lowering the issues/bugs/enhancements resolution times~\cite{jarczyk2014github}.
+\ei
+Even more specifically, as to issues related to heroes, Bier et al. warn when project becomes complicated, it is always better to have a community of experts rather than having very few hero developers ~\cite{bier2011online}. Willams et al. have shown that hero programmers are often responsible for poorly documented software system as they remain more busy in coding rather than writing code related documents ~\cite{hislop2002integrating}.  Also, Wood et al.~\cite{wood2005multiview} caution that heroes are often code-focused but software development needs workers acting as more than just coders (testers, documentation authors, user-experience analysts).
+
+Our summary of the above is as follows: with only isolated exceptions, most of the literature deprecates heroes. Yet as discussed in the introduction,
+many studies indicate that heroic projects are quite common. This mismatch between
+established theory and a widely observed empirical effect prompted the analysis
+discussed in this paper.
+ 
+
+\renewcommand{\xmark}{}
+\begin{table}
+\centering
+\scriptsize
+%\vspace{-0.4cm}
+\caption{Some results from e Google Scholar query {\em (software  heroes)  or  ((software  metrics)  and  (code  quality))}. Hero-related publications have a color background. Rows colored in gray denote hero-related
+publication that offer no metrics in support of their arguments.}
+\vspace{-0.2cm}
+\label{tbl:survey2}
+\begin{tabular}{r|@{~}c|@{~}c|@{~}r|@{~}c|@{~}c|@{~}c}
+        \begin{tabular}[c]{@{}c@{}}\textbf{Ref}\end{tabular} & \textbf{Year} & \textbf{cites} & \begin{tabular}[c]{@{}c@{}} \textbf{\#projects} \\\textbf{analyzed} 
+        \end{tabular} &\begin{tabular}[c]{@{}c@{}} \textbf{Uses}\\
+        \textbf{Product}\\
+        \textbf{Metrics?} %\\\textbf{Metric}
+        \end{tabular}
+        &\begin{tabular}[c]{@{}c@{}}
+         \textbf{Uses }\\\textbf{Process }\\\textbf{Metric?}
+        \end{tabular}
+        &\begin{tabular}[c]{@{}c@{}}
+        \textbf{Uses}\\
+        \textbf{Personnel}\\
+        \textbf{Metrics?}
+        \end{tabular}\\
+        \hline
+        \cite{544352} & 1996 &	1994 & 8 & \cmark & \xmark & \xmark \\
+       \rowcolor{blue!10} \textbf{\cite{mockus2002two}} & \textbf{2002} &	\textbf{1961} & \textbf{2} & \xmark & \cmark & \cmark \\
+        \cite{LI1993111} & 1993 &	1268 & 2 & \cmark & \xmark & \xmark \\
+        \cite{BRIAND2000245} & 2000 &	779	&  1 & \cmark & \xmark & \xmark \\
+        \cite{Nagappan:2006:MMP:1134285.1134349} & 2006 &	772	& 5 & \cmark & \cmark & \xmark \\
+        \cite{1191795} & 2002 &	711	& 1 & \cmark & \cmark & \xmark \\
+        \cite{Zimmermann:2007:PDE:1268984.1269057} & 2007 &	636	& 3 & \cmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{boehm2006view}} & \textbf{2006} &	\textbf{667} & \textbf{0} & \xmark & \cmark & \xmark \\
+        \cite{1435354} & 2005 &	622	& 2 & \cmark & \cmark & \xmark \\
+        \cite{Zimmermann:2009:CDP:1595696.1595713} & 2009 &	466	& 12 & \cmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{KrishnamurthyS}} & \textbf{2002} &	\textbf{466} & \textbf{100} & \xmark & \cmark & \xmark \\
+        \cite{935855} & 2001 &	445	& 1 & \cmark & \xmark & \xmark \\
+        \cite{ELEMAM200163} & 2001 &	406	& 1 & \cmark & \xmark & \xmark \\
+        \cite{Cartwright} & 2000 &	400 &	1 & \cmark & \xmark & \xmark \\
+        \cite{ELISH2008649} & 2008 &	398 &	4 & \cmark & \xmark & \xmark \\
+        \cite{841025} & 1999 & 346 &	1 & \cmark & \xmark & \xmark \\
+        \rowcolor{blue!10} \textbf{\cite{koch2002effort}} & \textbf{2002} &	\textbf{305} & \textbf{1} & \xmark & \cmark & \xmark \\
+        \cite{809745} & 1999 & 300 &	3 & \cmark & \xmark & \xmark \\
+        \rowcolor{blue!10} \textbf{\cite{4221622}} & \textbf{2007} &	\textbf{298} & \textbf{0} & \xmark & \cmark & \xmark \\
+        \cite{5560680} & 2009 &	271 &	1 & \cmark & \cmark & \xmark \\
+        \cite{Menzies2010} & 2010 &	256 &	10 & \cmark & \xmark & \xmark \\
+        \cite{5611551} & 2011 &	256	& 17 & \cmark & \cmark & \xmark \\
+        \rowcolor{blue!10} \textbf{\cite{Bird:2011:DTM:2025113.2025119}} & \textbf{2011} &	\textbf{233} &	\textbf{2} & \xmark & \cmark & \cmark \\
+        \cite{Jureczko:2010:TIS:1868328.1868342} & 2010 &	229	& 38 & \cmark & \xmark & \xmark \\
+        \cite{FENTON200732} & 2004 &	223 &	30 & \xmark & \cmark & \xmark \\
+        \cite{Pinzger2008CanDN} & 2008 &	223 &	1 & \cmark & \cmark & \cmark \\
+        \cite{Meneely2008PredictingFW} & 2008 &	218 &	1 & \cmark & \cmark & \cmark \\
+        \cite{Wolf:2009:PBF:1555001.1555017} & 2009 &	197 &	1 & \xmark & \cmark & \cmark \\
+        \cite{1385642} & 2005 &	186 &	SourceForge & \xmark & \xmark & \cmark \\
+        \cite{5362091} & 2009 &	177 &	6 & \cmark & \xmark & \cmark \\
+        \cite{671604} & 1998 & 172 &	2 & \cmark & \xmark & \xmark \\
+        \cite{Weyuker2008} & 2008 & 163 &	3 & \cmark & \cmark & \cmark \\
+        \cite{Pamela} & 2012 &	163 &	11 & \cmark & \cmark & \cmark \\
+        \cite{Okutan2014} & 2014 &	159 &	9 & \cmark & \cmark & \xmark \\
+        \cite{Knab} & 2006 &	131 &	1 & \cmark & \cmark & \xmark \\
+        \cite{HE2015170} & 2015 &	106 &	10 & \cmark & \cmark & \xmark \\
+        \cite{Majumder_2012} & 2012 &	103 &	905,470 & \xmark & \xmark & \cmark \\
+        \cite{Ratzinger:2008:RRS:1370750.1370759} & 2008 &	102 &	5 & \cmark & \xmark & \xmark \\
+        \rowcolor{blue!10} \textbf{\cite{robles2006contributor}} & \textbf{2006} &	\textbf{99} & \textbf{21} & \cmark & \xmark & \xmark \\
+        \cite{McIntosh2016} & 2016 &	92 &	3 & \xmark & \cmark & \cmark \\
+        \cite{fengzhang} & 2014 &	87 &	1,398 & \cmark & \xmark & \xmark \\
+        \cite{gregmadey} & 2002 &	85 &	39,000 & \xmark & \xmark & \cmark \\
+        \cite{KUPIAINEN2015143} & 2015 &	85 & 0	 & \cmark & \cmark & \cmark \\
+        \cite{Madeyski2015} & 2015 &	76 &	18 & \cmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{moniruzzaman2013comparative}} & \textbf{2013} &	\textbf{68} & \textbf{0} & \xmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{robles2009evolution}} & \textbf{2009} &	\textbf{65} & \textbf{1} & \xmark & \cmark & \cmark \\
+        \cite{lima2014coding} & 2014 &	61 & GitHub  & \xmark & \xmark & \cmark \\
+        \cite{Ostrand:2010:PFP:1868328.1868357} & 2010 &	59 &	6  & \xmark & \cmark & \cmark \\
+        \rowcolor{blue!10} \textbf{\cite{bissyande2013got}} & \textbf{2013} &	\textbf{58} & \textbf{100,000} & \cmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{Abreu:2009:DCF:1595808.1595835}} & \textbf{2009} &	\textbf{54} &	\textbf{1}  & \xmark & \cmark & \cmark \\
+        \cite{Jermakovics:2011:MVD:1984642.1984647} & 2011 &	48 &	2  & \xmark & \cmark & \cmark \\
+        \cite{bell2} & 2013 &	37 &	3  & \cmark & \cmark & \cmark \\
+      \rowcolor{gray!20}  {\cite{wood2005multiview}} &{2005} &	\textcolor{black}{36} &	\textcolor{black}{0} & \xmark & \xmark & \xmark \\
+        \cite{Concas:2010:ESS:1945538.1972593} & 2010 &	30 &	2  & \cmark & \xmark & \xmark \\
+        \cite{Bicer:2011:DPU:1987875.1987888} & 2011  &	27 &	2 & \xmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{jarczyk2014github}} & \textbf{2014} &	\textbf{24} & \textbf{2,000} & \xmark & \cmark & \xmark \\
+        \cite{Udaya} & 2007 &	22 &	4  & \cmark & \xmark & \xmark \\
+        \cite{7539677} & 2016 &	19 &	235,000  & \cmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{Peterson}} & \textbf{2013} &	\textbf{14} & \textbf{1,000} & \xmark & \cmark & \xmark \\
+        \cite{Prasad} & 2015 &	12 &	1  & \cmark & \cmark & \xmark \\
+        \cite{Kumar2017} & 2017 &	11 &	10  & \cmark & \cmark & \xmark \\
+        \cite{jiarpakdee2018impact} & 2018 &	11 &	15  & \cmark & \cmark & \xmark \\
+       \rowcolor{blue!10}  \textbf{\cite{Agrawal_2018}} & \textbf{2018} &	\textbf{6} & \textbf{832} & \xmark & \cmark & \xmark \\
+        \cite{Gupta2017} & 2017 &	5 &	12   & \cmark & \xmark & \xmark \\
+      \rowcolor{gray!20}  {\cite{bier2011online}} &{2011} &	\textcolor{black}{3} &	\textcolor{black}{0} & \xmark & \xmark & \xmark \\
+        \cite{Jayanthi2018} & 2018 &	2 &	4   & \cmark & \cmark & \xmark \\
+      \rowcolor{gray!20}  {\cite{hislop2002integrating}} &{2002} &	\textcolor{black}{2} &	\textcolor{black}{0} & \xmark & \xmark & \xmark \\
+      \rowcolor{blue!10}  {\cite{morcovcomplex}} &{2012} &	 \textcolor{black}{2} &	\textcolor{black}{0} & \xmark & \xmark & \xmark \\
+        \cite{10.1007/978-981-13-1927-3_48} & 2018 &	0 &	5   & \cmark & \xmark & \xmark \\
+        \cite{prasad2018statistical} & 2018 &	0 &	 1  & \cmark & \cmark & \xmark \\
+        \cite{dahab2018enhancing} & 2018 &	0 &	2   & \xmark & \cmark & \xmark \\
+        \cite{8595100} & 2018 &	0 &	1   & \cmark & \xmark & \xmark \\
+        \cite{vijay2017software} & 2017 & 0	 &	50   & \xmark & \cmark & \xmark \\
+        \cite{10.1007/978-3-319-92270-6_42} & 2018 & 0	&	0  & \xmark & \cmark & \cmark \\
+        
+         
+        
+\end{tabular}
+\vspace{-0.3cm}
+\end{table}
+
+ 
+
+ 
+\subsection{Software Quality   Metrics}\label{tion:metrics}
+
+As shown by the {\em No. of Projects} column in Table \ref{tbl:survey2}, our sample size  
+  (1100+ projects) is orders of magnitude larger than the typical paper in this arena.
+This table was   generated as follows. Firstly, using Google Scholar we searched for ``(software heroes) or ((software metrics) and (code quality))''. Secondly, for papers more than two years old, we pruned ``non-influential
+papers'' which we define has having less than ten citations per year. Thirdly, we read the papers to determine what kind of metrics they used.
+When presenting these results (in Table \ref{tbl:survey2}),
+hero-related publications have a blue background ( bold text also ) while rows colored in gray denote hero-related publication that offer no metrics in support of their arguments. 
+
+
+Table \ref{tbl:survey2} also shows that most papers
+do not use  a wide range of software metrics.
+ Xenos \cite{Xenos} distinguishes software metrics as  follows.
+ {\em Product metrics} are metrics that are directly related to the product itself, such as code statements, delivered executable, manuals, and strive to measure product quality, or attributes of the product that can be related to product quality.  
+ {\em Process metrics} focus on the process of software development and measure process characteristics, aiming to
+detect problems or to push forward successful practices.  
+Lastly,  {\em personnel metrics} (a.k.a. {\em resource metrics})
+are those related to the resources required for software development and their performance. The capability, experience of each programmer and communication among all the programmers are related to product quality \cite{wolf2009predicting,de2004sometimes,cataldo2013coordination,cataldo2007coordination}. 
+ In our work:
+ \bi
+ \item   Code interaction graph  is a  process metrics;
+ \item Social interaction graphs is a personnel  metrics;
+ \item Defect counts are product metrics.
+\ei
+(Aside: In this text we have used ``resource'' and ``peronnel'' interchangeably  since, according to Center for Systems and Software Engineering, ~\cite{Xenos} resource metrics relating to programmer quality or communication related metrics are also called {\em personnel metrics}.)
+
+
+
+\begin{figure}[!t]
+\begin{center}\includegraphics[width=6cm]{Venn.png}\end{center}
+\caption{Summary of Table \ref{tbl:survey2}}
+\label{fig:venn}
+\end{figure}
+ 
+This paper combines all  three kinds of metrics and applies the combination to exploring the effects of heroism on software development. There are many previous studies that explore one or two of these types of metrics.
+Fig \ref{fig:venn} summarizes Table \ref{tbl:survey2} and shows that,
+in that sample, very few papers in software metrics and code quality
+combine insights from product and process and personnel metrics. 
+To the best of our knowledge, this is the first paper in this areana
+to discuss
+heroism using   product and process and personnel metrics.   
+
+Having worked with that data, we think we know why other publications do not report results using a wide range of metrics. Such reports
+require extensive and elaborate queries.
+ The analysis of this paper required
+months of struggling with the GitHub API (and its queries/hour limits), followed by much   scripting, followed by many tedious manual checks that our automatic tools were behaving sensibly. In all, we estimate that this paper required nine weeks of coding (40 hours per week) to join across
+process and product and personnel metrics.
+
+
+
+
+\begin{figure*}[!t]
+\includegraphics[width=\linewidth]{meta_final3.png}
+\caption{Distribution of projects depending on Number of Releases, Duration of Project, Number of Stars, Forks. Watchers and Developers.  Box plots show the min to max range. Central boxes show the 25th, 50th, 75th percentiles.}
+\label{fig:data}
+\end{figure*}
+
+
+
+\section{Methodology}
+\label{sec:Methodology}
+
+\subsection{Data Collection}
+\label{sec:Data Collections}
+To perform our experiments we used open-source projects collected from GitHub. 
+ We recreate all the committed files to identify code changes in each commit file and identify developers 
+using the   GitHub API, we  downloaded issue comments and events for a particular project, then use the {\tt git log}
+command to mine the git commits added to the project throughout the project lifetime. 
+
+Using the information from each commit`s message, we use the buggy commit identifier to label commits as buggy commit or not. First, we  identified the commits which was used to fix some bugs in the code.
+Next, we used {\tt git blame} to identify the last commit which introduced the bug. 
+
+GitHub has many repositories (over   67 million projects  as of October, 2018).
+Many of these projects   contain very short development cycles;
+are used for personal use;
+and are  not be related to software development. Such projects may bias research findings. 
+According, we used the  established wisdom~\cite{perils,curating} and some of our own engineering judgement to filter our data
+as follows:
+
+\begin{itemize}
+    \item {\textit{{Collaboration}}: refers to the  number of pull requests. This is indicative of how many other peripheral developers work on this project. We required all  projects to have at least one pull request.}
+    \item {\textit{{Commits}}: The project must contain more than 20 commits.}
+    \item {\textit{{Duration}}: The project must contain software development activity of at least 50 weeks.}
+    \item {\textit{{Issues}}: The project must contain more than 10 issues.}
+    \item {\textit{{Personal Purpose}}: The project must not be used and maintained by one person. The project must have at least eight contributors.}
+    \item {\textit{{Software Development}}: The project must only be a placeholder for software development source code.}
+    \item {\textit{Project Documentation Followed}: The projects should follow proper documentation standard to log proper commit comment and issue events to allow commit issue linkage.}
+    \item {\textit{Social network validation}:  The Social Network that is being build should have at least 8 connected nodes in both the communication and code interaction graph (this point is discussed further in \ref{sec:Personnel Metrics} and \ref{sec:Product Merics}).}
+\end{itemize}
+To select our target projects, we used the ``GitHub showcase project'' list, favoring projects near the top of that list.
+The resulting projects have the ranges shown in \fig{data}
+and the languages shown in \fig{lang_projects}. To understand this figure, we offer the following definitions:
+\bi
+\item
+{\em Release:} (based on Git tags)  mark a specific point in your repository's history. Number of releases defines different versions published, which signifies considerable amount of changes done between each version.
+\item
+{\em Duration:} length of project from its inception to current date or project archive date, and signifies how long a project has been running and in active development phase.
+\item
+{\em Stars:} signifies number of people liking a project or use them as bookmarks so they can follow what's going on with the project later.
+\item
+{\em Forks:} A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project. This signifies how people are interested in the repository and actively thinking of modification of the original version.
+\item
+{\em Watcher:} Watchers are GitHub users who have asked to be notified of activity in a repository, but have not become collaborators. This is a representative of people actively monitoring projects, because of possible interest or dependency.
+\item
+{\em Developer:} Developers are the contributors to a project, who work on some code, and submit the code using commit to the codebase. The number of developers signifies the interest of developers in actively participating in the project and volume of the work.
+\ei
+
+
+
+\begin{figure}
+{\small \renewcommand{\baselinestretch}{0.7}
+\begin{tabular}{rrl}
+    \textbf{Language} & \textbf{Projects} & \\
+    Shell & 517 &\rule{86.17pt}{8pt} \\
+    JavaScript & 467 &\rule{77.83pt}{8pt} \\
+    Ruby & 460 &\rule{77.17pt}{8pt} \\
+    HTML & 393 &\rule{76.67pt}{8pt} \\
+    CSS & 306 &\rule{65.5pt}{8pt} \\
+    Python & 269 &\rule{51pt}{8pt} \\
+    C & 215 &\rule{35.83pt}{8pt} \\
+    C++ & 150 &\rule{25pt}{8pt} \\
+    Java & 148 &\rule{24.67pt}{8pt} \\
+    Perl & 132 &\rule{22pt}{8pt} \\
+    PHP & 122 &\rule{20.22pt}{8pt} \\
+    Batchfile & 100 &\rule{16.67pt}{8pt} \\
+    Objective-C & 76 &\rule{12.67pt}{8pt} \\
+    M4 & 53 &\rule{8.83pt}{8pt} \\
+    Roff & 50 &\rule{8.33pt}{8pt} \\
+    CoffeeScript & 47 &\rule{7.83pt}{8pt} \\
+    Vim script & 46 &\rule{7.67pt}{8pt} \\
+    C-Sharp & 46 &\rule{7.67pt}{8pt} \\
+    Dockerfile & 43 &\rule{7.17pt}{8pt} \\
+    CMake & 42 &\rule{7pt}{8pt} \\
+    Emacs Lisp & 39 &\rule{6.5pt}{8pt} \\
+    Gherkin & 39 &\rule{6.5pt}{8pt} \\
+    Perl 6 & 38 &\rule{6.33pt}{8pt} \\
+     & 
+\end{tabular}}
+\caption{Distribution of projects depending on languages.
+Many  projects use combinations of languages to
+achieve their results. Here, we show majority language used in the project.}
+\label{fig:lang_projects}
+\end{figure}
+
+\begin{figure*}
+\centering
+\scriptsize
+\noindent
+\centering
+\begin{tikzpicture}
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{1}) {Ananya};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{2}) [right = 0.7cm of v_{1}] {Maria};
+		\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{3}) [below = 0.7cm of v_{2}] {Chen};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{4}) [left = 0.7cm of v_{3}] {David};    
+    	
+    \end{tikzpicture}
+\hspace{3em}
+\begin{tikzpicture}
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{1}) {Ananya};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{2}) [right = 0.7cm of v_{1}] {Maria};
+		\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{3}) [below = 0.7cm of v_{2}] {Chen};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{4}) [left = 0.7cm of v_{3}] {David};
+    
+    	\path[draw,thick]
+    	(v_{1}) edge node[midway,above] {$ {1} $} (v_{2})
+    	(v_{1}) edge node[midway,above] {$ {1} $} (v_{3})
+    	(v_{1}) edge node[midway,left] {$ {1} $} (v_{4});
+    
+    	
+    \end{tikzpicture}
+\hspace{3em}
+\begin{tikzpicture}
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{1}) {Ananya};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{2}) [right = 0.7cm of v_{1}] {Maria};
+		\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{3}) [below = 0.7cm of v_{2}] {Chen};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{4}) [left = 0.7cm of v_{3}] {David};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{5}) [left = 0.7cm of v_{1}] {Vadim};
+    
+    	\path[draw,thick]
+    	(v_{1}) edge node[midway,above] {$ {1} $} (v_{2})
+    	(v_{1}) edge node[midway,above] {$ {1} $} (v_{3})
+    	(v_{1}) edge node[midway,left] {$ {1} $} (v_{4});
+    
+    	
+    \end{tikzpicture}
+\hspace{3em}
+\begin{tikzpicture}
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{1}) {Ananya};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{2}) [right = 0.7cm of v_{1}] {Maria};
+		\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{3}) [below = 0.7cm of v_{2}] {Chen};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{4}) [left = 0.7cm of v_{3}] {David};
+    	\node[main node,minimum size=0.8cm,fill={rgb:black,1;white,8}] (v_{5}) [left = 0.7cm of v_{1}] {Vadim};
+    
+    	\path[draw,thick]
+    	(v_{1}) edge node[midway,above] {$ {2} $} (v_{2})
+    	(v_{2}) edge node[midway,right] {$ {2} $} (v_{3})
+    	(v_{3}) edge node[midway,below] {$ {2} $} (v_{4})
+    	(v_{4}) edge node[midway,left] {$ {3} $} (v_{1})
+    	(v_{1}) edge node[midway,above] {$ {2} $} (v_{3})
+    	(v_{2}) edge node[midway,below] {$ {2} $} (v_{4})
+    	(v_{1}) edge node[midway,above] {$ {2} $} (v_{5})
+    	(v_{4}) edge node[midway,below] {$ {2} $} (v_{5});   
+    	
+    \end{tikzpicture}
+\caption{\textbf{Example of creating a social interaction graph between four GitHub developers.}
+\textbf{Step 1 (LHS):} Ananya,Maria,Chen and David are four developers in a GitHub project. \textbf{Step 2:} Ananya creates one issue where Maria,Chen and David comment. So, we join Ananya-Maria,Ananya-Chen,Ananya-David with edge of weight 1. \textbf{Step 3:} A new developer Vadim comes. \textbf{Step 4 (RHS):} Vadim creates one new issue where Ananya and David comments. So, two new edges are introduced - (Ananya-Vadim(1), David-Vadim(1)).  Now we iterate for each developer, so all of them become connected and weight becomes 2 for all the edges. Lastly,  weight of Ananya-David increases to 3.}
+\label{fig:social_interaction_graph}       
+\end{figure*}
+
+
+
+
+
+\subsection{Metric Extraction}
+\label{sec:Experimental Setup}
+
+\subsubsection{Process Metrics}
+\label{sec:process metrics}
+Recall that the  developer code interaction graph records who touched what code, where a developer is defined as a person who has ever committed any code into the codebase. We create that graph as follows:
+\bi
+\item
+Project   commits  were extracted from each branch in the git history. 
+\item
+Commits are extracted from the git log and stored in a file system.
+\item
+To access the file changes in each commit we recreate the files that were modified in each commit by (a)~continuously moving the {\tt git head} chronologically on each branch. Changes were then   identified  using {\tt git diff} on two consecutive git commits.
+\item
+The graph is created by going through each commit and adding a node for the committer. Then we use {\tt git blame} on the lines changed to find previous commits following a similar process of SZZ algorithm~\cite{williams2008szz}. We identify all the developers of the commits from {\tt git blame} and add them as a node as well.
+\item
+After the nodes are created, the edges were drawn between the developer who changed the code, and whose code was changed. Those  edges were weighted by the change size between the person. 
+\ei
+
+
+
+
+\subsubsection{Personnel Metrics}
+\label{sec:Personnel Metrics}
+
+Recall that the  developer social interaction graph records who talked to each other via commit comments. We create that graph as follows.
+
+\bi
+\item
+ A node is created for the person who has created the issue, then another set of nodes are created for each person who has commented on the issue. So essentially in Social interaction graph each node in the graph is any person (developer or non-developer) ever created an issue or commented in an issue.
+ \item
+ The nodes are connected by edges, which are created by (a) connecting the person who has created the issue to all the persons who have commented in that issue and (b) creating edges between all the persons who have commented on the issue, including the person who has created the issue. 
+ \item
+ The edges are weighted by the number of comments between two persons. 
+ \item
+ The weights are updated using the entire history of the projects. The creation and weight update is similar to Figure~\ref{fig:social_interaction_graph}.
+ \ei
+
+
+
+
+
+\subsubsection{Product Metrics}
+\label{sec:Product Merics}
+This study explores the effects of social and code communication in code quality, by measuring buggy commit introduction,  but in order to do so we do need to identify the commits that introduced the bug in the code from the historic project data. This is   a 
+challenging task since there is no direct way to find the commits or the person who is responsible for the bug/issue introduction. Hence,
+we proceeded as follows:
+
+\bi
+\item
+It first starts with all the commits from {\tt git log} and identify the commit messages as this is often an excellent source of information regarding what the commit is about.
+\item
+Then to use the commits messages for labeling it uses a natural language based processor, which includes stemming and other nltk preprocessors to normalize the commit messages.
+\item
+Then to identify commit messages which is a representation of bug/issue fixing commits, a list of words and phrases extracted from previous studies of 1000+ projects (Open Source and Enterprise) are used. The system checked for these words and phrases in the commit messages and if found, it marks these as commits which fixed some bugs.
+\item
+To perform sanity check  a portion of the commits was manually verified using random sampling from different projects.
+\item
+These labeled commits are now processed to extract the file changes as the process mentioned in process metrics section~\ref{sec:process metrics}.
+\item
+Next {\tt git blame} is used to go back in the git history each line of the changes in each file to identify a responsible commit where each line was created or changed last time.
+\ei
+By this process, commits that were responsible for introduction of the bugs in the system/project can be found. We label these commits as buggy commits and label the author of the commit as the person responsible for introducing the bug.
+
+
+
+
+
+
+\subsubsection{Joining Across the Metrics}
+\label{sec:Finding Relation}
+This study tries to answer the question, what is the relevance of heroes in the software projects. To answer this question we join across all the metrics shown above.
+Specifically, using the two graphs,   we calculate the node degree (number of edges touching
+a vertex) of the graphs. Note that higher degrees represents more communication or interaction. When we visualize the collected data for all the projects, we decide not to stick to 80\% threshold as literature suggests to find heroes. Rather we vary our threshold to 80\%, 85\%, 90\% and 95\%. Lastly we choose the maximum threshold (95\%) to represent all our results. So we are not contradicting with previous studies but verifying effects of heroism with different thresholds. 
+In our studies,
+ top contributors (or heroes) and non-heroes
+ are defined as : 
+\begin{equation}
+\label{eq:node-Degree}
+    \mbox{ Node Degree of } N_i = D(N_i)= \sum_{j=1}^{n} a_{ij}
+\end{equation}
+\begin{equation}
+\label{eq:hero}
+    \mbox{  Hero} = Rank\left(D(N_i)\right) > \frac{P}{100}*(N + 1)
+\end{equation}
+\begin{equation}
+\label{eq:non-hero}
+    \mbox{  Non-Hero} = Rank\left(D(N_i)\right) < \frac{P}{100}*(N + 1)
+\end{equation}
+where:
+
+% \begin{conditions}
+%  N     &   Number of Developers \\
+%  P     &   Percentile(95) \\ 
+%  Rank() & The percentile rank of a score is the percentage \\ 
+%         & of scores in its frequency distribution that are \\
+%         & equal to or lower than it. \\
+%  a &   Adjacency matrix for graph where \\
+%     & $a_{ij}>0$    denotes a connection.\\
+% \end{conditions}
+
+\begin{table}[h]
+\begin{tabular}{|l|l|}
+\hline
+N & Number of Developers \\ \hline
+P & 95 Percentile \\ \hline
+Rank() & \begin{tabular}[c]{@{}l@{}}The percentile rank of a score is the percentage \\ of scores in its frequency distribution that is\\ equal to or lower than it.\end{tabular} \\ \hline
+a & \begin{tabular}[c]{@{}l@{}}Adjacency matrix for the graph \\ where $a_{ij}>0$  denotes a connection\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+
+Using these data and by applying the hero definition from formula (\ref{eq:hero}) and (\ref{eq:non-hero}) (look a the top 5\%), we can find the developers who are responsible for 95\% of the work or the hero developers.
+
+Following this, in this study to find the effect of heroism, we compared the percentage of buggy commit introduced by a certain developer. For that purpose,
+we categorize the developers into 2 groups:
+\bi
+\item
+The hero developers, the core group of the developers of a certain project who makes regular changes in the codebase. In this study this is represented by the developers whose node degree is above 95th percentile of the node degree (developers' communication and code interaction of the system graph).
+\item
+The non-hero developers are all other developers;
+i.e.  developers associated with  nodes with a degree below the 95th percentile.
+\ei
+This study compares the performance of these 2 sets of developers using the percentage of bugs introduced by them in the codebase.  
+
+
+
+
+%\subsection{Statistical Tests}
+\section{Results}
+\label{sec:Results}
+
+Our results are structured around three research questions:
+
+\begin{description}
+    \item[{\bf RQ1:}] How common are hero projects?
+    \item[{\bf RQ2:}] What    impact  does heroism  have  on  code quality?
+    \item[{\bf RQ3:}] Does team size alter the above results?
+\end{description}
+We ask the third question since, when we discuss this work with our colleagues,
+a common comment is that heroes are better in projects of a certain size.  
+Here, what ``certain size'' means can vary from person to person -- some think heroes work best for small projects and others think heroes are an essential part of
+large projects. In any case, it is a common enough question to prompt its own particular investigation.
+
+
+\subsection{\textbf{RQ1:} \textit{How common are hero projects?}}
+\label{sec:RQ1}
+
+We say a project is a ``hero project'' if, when we isolate the developers who handle  95\% of the interactions (or more),
+we see only 5\% (or less) of the developers. To compute ``interaction'', we mean   the  weighted in-degree counts to each vertex. The top 95\% group are all vertices with a count above $\mathit{min}+.2*(\mathit{max}-\mathit{min})$ 
+(where $\mathit{min,max}$ come from the smallest,largest counts).
+
+This definition could be applied to either the code interaction graph or the social interaction graph. Regardless,
+the observed pattern is the same. As shown in
+\fig{RQ1_following} and \fig{RQ2_following}, no matter what the source, the pattern is the same. Measured
+in terms of code or social interaction, hero projects comprise over 80\% of our sample.
+
+ 
+
+\begin{figure}
+\includegraphics[width=\linewidth, height =6.1cm]{RQ1_Code.png}
+\caption{RQ1 Results (Code Interaction): Distribution of hero projects and non-hero projects converted to percentage from developer code interaction perspective.}
+\label{fig:RQ1_following}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\linewidth, height =6.1cm]{RQ1_Social.png}
+\caption{RQ1 Results  (Social Interaction): Distribution of hero projects and non-hero projects converted to percentage from developer social communication perspective.}
+\label{fig:RQ2_following}
+\end{figure}
+
+
+\subsection{\textbf{RQ2:} \textit{What impact does heroism have on code quality?}}
+\label{sec:RQ2}
+
+
+
+RQ2 explores what kind of effect heroism have on code quality. In order to explore this, we created the developer social interaction graph and developer code interaction graph, then we identified the developer responsible for introducing those bugs into the codebase. Then we find the percentage of buggy commits introduced by those developers by checking (a)~the number of buggy commit introduced by those developers and (b)~their number of total commits.\\
+
+Fig~\ref{fig:RQ2_code} and Fig~\ref{fig:RQ2_social} (here y-axis represents the median of the bug introduction percentage for all hero and non-hero developers for each project respectively and x-axis is different projects used in this study) compares the performance of hero and non-hero developers
+(where the later are the 95\% group that appear in the bottom 5\% of the interaction scores) and summarized in Table~\ref{tbl:team_size}. In both figures,
+each x-point shows the hero and non-hero results from the same project (and 
+projects are sorted by the non-hero observations). In those charts we note that:
+\bi
+\item
+There exists a large number of non-heroes that always produce buggy commits, 100\% of the time (evidence: the flat right-hand-side regions of the non-hero plots in both figures). That population size of ``always buggy'' is around a third in 
+Fig~\ref{fig:RQ2_code} and a fourth in Fig~\ref{fig:RQ2_social}.
+\item
+To say the least, heroes nearly always have fewer buggy commits than non-heroes. The 25th, 50th, 75th percentiles for both groups are
+shown in table~\ref{tbl:team_size}. This table clearly shows why heroes are so  prevalent-- they generate commits that are dramatically
+less buggy than non-heroes.
+\ei
+
+
+\begin{figure}[!t]
+\includegraphics[width=.9\linewidth]{RQ2_Code.png}
+\caption{RQ2 results (Code Interaction): Percentage of bugs introduced by hero and non-hero developers from developer code interaction prospective in Hero Projects .}
+\label{fig:RQ2_code}
+\end{figure}
+
+
+\begin{figure}[!t]
+\includegraphics[width=.9\linewidth]{RQ2_Social.png}
+\caption{RQ2 results (Social Interaction): Percentage of bugs introduced by hero and non-hero developers from developer social interaction prospective in Hero Projects.}
+\label{fig:RQ2_social}
+\end{figure}
+
+
+
+
+
+%\begin{table}[!h]
+%\caption{Sumamries of Fig~\ref{fig:RQ2_code} and %Fig~\ref{fig:RQ2_social}.}\label{tbl:summ}
+%\begin{center}
+%\begin{tabular}{|l|l|l|l|l|}
+%\hline
+%\multicolumn{2}{|l|}{}                         & \multicolumn{3}{l|}{percentile} \\ %\hline
+%metric                              & group    & 25th      & 50th     & 75th     \\ %\hline
+%\multirow{2}{*}{Code Interaction}   & Hero     & 0.35      & 0.42     & 0.50     \\ %\cline{2-5} 
+%                                    & Non-Hero & 0.50      & 0.69     & 1.00     \\ %\hline
+%\multirow{2}{*}{Social Interaction} & Hero     & 0.27      & 0.37     & 0.46     \\ %\cline{2-5} 
+%                                    & Non-Hero & 0.46      & 0.60     & 0.83     \\ %\hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+
+
+
+\begin{table}[!t]
+%\setlength\extrarowheight{5pt}
+\caption{The {\em All} rows of this table
+show the RQ2 results.
+The other rows show the RQ3 results.
+The table summarizes of Fig~\ref{fig:RQ2_code}, Fig~\ref{fig:RQ2_social}, Fig~\ref{fig:RQ3_social} and Fig~\ref{fig:RQ3_code}.
+The key feature of this table is that the bug injection distribution is barely changed after stratifying the data according to project size.}\label{tbl:team_size}
+{\scriptsize
+\begin{center}
+
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multicolumn{3}{|l|}{}                                                   & \multicolumn{3}{l|}{Percentile} \\ \hline
+metric                              & Team Size               & group    & 25th        & 50th       & 75th       \\ \hline
+\multirow{8}{*}{Code Interaction}   & \multirow{2}{*}{Small}  & Hero     & 0.32      & 0.42     & 0.50     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.46      & 0.55     & 0.75     \\ \cline{2-6} 
+                                    & \multirow{2}{*}{Medium} & Hero     & 0.33      & 0.41     & 0.49     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.50      & 0.60     & 1.00     \\ \cline{2-6} 
+                                    & \multirow{2}{*}{Large}  & Hero     & 0.36      & 0.42     & 0.50     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.56      & 0.80     & 1.00     \\ \cline{2-6} 
+                                    & \multirow{2}{*}{All}    & Hero     & 0.35      & 0.42     & 0.5      \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.5       & 0.69     & 1.0      \\ \hline
+\multirow{8}{*}{Social Interaction} & \multirow{2}{*}{Small}  & Hero     & 0.27      & 0.36     & 0.48     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.39      & 0.50     & 0.71     \\ \cline{2-6} 
+                                    & \multirow{2}{*}{Medium} & Hero     & 0.26      & 0.36     & 0.46     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.40      & 0.56     & 0.82     \\ \cline{2-6} 
+                                    & \multirow{2}{*}{Large}  & Hero     & 0.27      & 0.37     & 0.46     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.50      & 0.65     & 0.90     \\ \cline{2-6} 
+                                    & \multirow{2}{*}{All}    & Hero     & 0.27      & 0.37     & 0.46     \\ \cline{3-6} 
+                                    &                         & Non-Hero & 0.46      & 0.6      & 0.83     \\ \hline
+\end{tabular}
+
+\end{center}}
+\end{table}
+
+\begin{table}[!t]
+%\setlength\extrarowheight{5pt}
+\centering
+\label{table:project size}
+\caption{Project division based different project size for Developer Code Interaction graph and Developer Social Interaction graph}
+{\scriptsize
+\begin{center}
+\begin{tabular}{|p{1cm}|p{2.2cm}|p{2.2cm}|p{1.5cm}|}\hline
+\multicolumn{1}{|l|}{} & \multicolumn{3}{|c|}{Number of Projects Collected}                      \\\hline
+Project Size         & Developer Code Interaction Graph & Developer Social Interaction Graph & Common in Both  \\\hline
+Small                & 308                              & 203            &     203                \\\hline
+Medium               & 367                              & 329            &     329               \\\hline
+Large                & 652                              & 641            &     639              \\\hline 
+\end{tabular}
+\end{center}}
+\end{table}
+
+\begin{figure}[!t]
+\includegraphics[width=\linewidth]{RQ3_Code.png}
+\caption{R3 results (Code Interaction): Percentage of Hero and Non-Hero projects when divided by team Size.
+ A visual comparison of this
+chart with \fig{RQ2_code} show a very similar pattern.
+}
+\label{fig:RQ3_code}
+\end{figure}
+   
+  
+\begin{figure}[!t]
+\includegraphics[width=\linewidth]{RQ3_Social.png}
+\caption{RQ3 results (Social Interaction): Percentage of Hero and Non-Hero projects when divided by team Size. A visual comparison of this
+chart with \fig{RQ2_social} show a very similar pattern.}
+\label{fig:RQ3_social}
+\end{figure}
+
+
+\subsection{\textbf{RQ3:} \textit{Does team size alter the above results?}}
+\label{sec:RQ3}
+
+Recall that we ask this question since, when discussing this work with colleagues,
+we are often asked if heroes are less/more important to smaller/larger projects.
+  In order to study the effect of team size,
+   we apply the  advice
+of Gautam et al.~\cite{gautam2017empirical} who divided projects into three categories:
+
+
+
+\begin{itemize}
+    \item  Small: A project is considered small if number of developers is greater than 8 but less than 15.
+    
+    \item  Medium: A project is considered medium if number of developers is greater than 15 but less than 30.
+    
+    \item  Large: A project is considered big if number of developers is greater than 30.
+    
+\end{itemize}
+
+
+
+ As shown in Figure~\ref{fig:RQ3_social} and Figure~\ref{fig:RQ3_code} and summarized in Table~\ref{tbl:team_size},
+  the bug injection distributions of heroes and non-heroes is  barely changed after stratifying the data according to project size. Hence, when discussing the external validity of these conclusions,
+we need not explore issues of team size and hero prevalence.
+
+
+
+
+
+\section{Discussion}
+\label{sec:Discussion}
+
+\subsection{Herbsleb Hypothesis (and Analogs)}
+We find it insightful to consider the above results in the context of 
+the {\em Hersleb hypothesis}~\cite{Herbsleb:2014}. At the ICSE'14 keynote, Hersleb defined coding to be a socio-technical
+process where code and humans interact. According to what we call the the Hersleb hypothesis,
+the following anti-pattern is a strong predictor for defects:
+\bi
+\item
+ If two code sections communicate...
+ \item
+But the programmers of those two sections do not...
+\item
+Then that code section is more likely to be buggy.
+\ei
+To say that another way,  coding is a social process and better code arises from better social interactions. 
+
+Many other researchers offer conclusions analogous to the Hersleb hypothesis
+ Developer communication/interaction is often cited as one of the most important factor for a successful software development \cite{Agile_software_development,Kraut:1995:CSD:203330.203345,1205177}. Many researchers have shown that successful communication between developers and adequate knowledge about the system plays a key role in successful software development \cite{TESCH2009657,Girba,841783}. As reported as early as 1975 in Brooks et al.  text ``The Mythical Man Month''~\cite{brooks1995mythical},
+ communication failure can lead to coordination problem, lack of system change knowledge in the projects as discussed by Brooks et al. in the Mythical Man-Month.
+
+The usual response to the above argument is to improve communication by ``smoothing it out'', i.e. by deprecating
+heroes since, it is argued,  that encourages more communication across an entire project~\cite{bier2011online,boehm2006view,hislop2002integrating,morcovcomplex,wood2005multiview}.  
+
+
+
+
+
+The results of the last section suggest that it is time to
+explore  another response: the best way to reduce communication overhead and to decrease defects is to {\em centralize
+the communicators}. In our data, commits with lower defects come from the small number of hero developers who have learned how to
+talk to more people. Hence, we would encourage more research into better methods for rapid, high-volume, communication in a one-to-many setting (where the ``one'' is the hero and the ``many'' are everyone else).
+
+\subsection{Chief Programmer}
+One strange feature of our results is that what is old is now new.   Our results (that heroes are important) echo a decades old concept. In 1975, Fred Brooks wrote of  ``surgical teams'' and the ``chief programmer'' ~\cite{brooks1974mythical}. He argued that - 
+
+\begin{itemize}
+  \item  Much as a surgical team during surgery is led by one surgeon performing the most critical work, while directing the team to assist with less critical parts.
+  
+  \item Similarly, software projects should be led by one ``chief programmer'' to  develop critical system components while the rest of a team provides what is needed at the right time.
+\end{itemize}
+Brooks conjecture that ``good'' programmers are generally much more as productive as mediocre ones. This can be seen in the results that hero programmers are much more productive and less likely to introduce bugs into the codebase.
+Heroes are born when developers become are so skilled at what they do, that  they assume a central position in a project.
+In our view,  organizations need to acknowledge their dependency on such heroes, perhaps altering their human resource policies and manage these people more efficiently by retaining them.
+
+\section{Threats to Validity}
+\label{sec:Threats to Validity}
+  \subsection{Sampling Bias} Our conclusions are based on 1100+ open source GitHub projects that started this analysis.  It is possible that   different initial projects would have lead to different conclusions. That said, our initial sample is very large so we have some confidence that this sample represents an interesting range of projects.  
+            
+     \subsection{Evaluation Bias} In  RQ1,RQ2 and RQ3, we said that there heroes are prevalent and responsible for far less bug introduction than non-hero developers.
+     It is possible that, using other metrics like if heroes reduces productivity by becoming bottleneck, there may well be a difference in these different kinds of projects. But measuring people resources only by how fast releases are done or issues are fixed many not be a good indicator of measuring affects of having heroes in team. This is a matter that needs to be explored in future research. 
+
+         \subsection{Construct Validity} At various places in this report, we made engineering decisions about (e.g.) team size; and (e.g.) what constitutes a ``hero'' project. While those decisions were made using advice from the literature (e.g.~\cite{gautam2017empirical}), we acknowledge that other constructs might lead to different conclusions. 
+     
+
+\subsection{External Validity} 
+In the literature, ``hero developers'' are those who are responsible for 80\% of the work. In our study, we try with 80\%, 85\%, 90\% and 95\% threshold and get the same conclusion that almost 80\% of our sample projects are hero-dominated. Here we do not contradict with the prior definition of heroism, we rather verify it with different thresholds.
+
+
+We have relied on natural language processor to analyze commit messages to mark them as buggy commits. These commit messages are created by the developers and may or may not contain proper indication of if they were used to fix some bugs. There is also a possibility that the team of that project might be using different syntax to enter in commit messages.
+
+Similarly we have used GitHub issues and comments to create the communication graph, It is possible that the communication was not made using these online forums and was done with some other medium. To reduce the impact of this problem, we  did take precautionary step to (e.g.,) include various tag identifiers of bug fixing commits, done some spot check on projects regarding communication etc.
+
+Our conclusion shows that almost 80\% of our sample projects are hero dominated.  In case of large size public GitHub projects, there are official administrators and maintainers who are responsible for issue labelling or assigning. So, they frequently comment on all of the issues but though they are not active developers. These people should not be considered as hero developers. Finding these people needs manual inspection which is not possible for 1100+ projects. We decide to put it as a limitation of our study as we deal with a huge no. of projects.
+    
+ 
+
+ 
+\section{Conclusion}
+\label{sec:Conclusion}
+
+The established wisdom in the literature is to depreciate ``heroes'',
+i.e., a small percentage of the staff who are responsible for most of the progress on a project.
+But, based on a study of 1100+ open source GitHub projects,
+we assert:
+\bi
+\item  Overwhelmingly, most projects are hero projects.
+This result holds true for small, medium, and large projects.
+\item   Hero developers are far less likely to introduce bugs into the codebase than their non-hero counterparts. Thus having heroes in projects significantly affects the code quality.
+\ei
+Our empirical results call for a revision of a long-held truism in software engineering.
+Software heroes are far more common and valuable than suggested by the literature,
+particularly from code quality perspective. Organizations should reflect on better ways
+to find and retain more of these software heroes.
+
+More generally, we would  comment that  it is time
+to reflect more on long-held truisms in our field. Heroes are widely deprecated in the literature, yet empirically they are quite beneficial. 
+ What other statements in the literature need to be
+reviewed and revised?
+
+% \balance
+\bibliographystyle{plain}
+\bibliography{Mybib}
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-acmtog.tex'.
